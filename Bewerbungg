@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AfLS - Alternative für Los Santos | Die Modernisierungskraft</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 50%, #1976d2 100%);
+            color: white;
+            padding: 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            background: rgba(0,0,0,0.2);
+            padding: 10px 0;
+            text-align: center;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 900;
+            color: #1a237e;
+            border: 4px solid rgba(255,255,255,0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .logo .stripes {
+            width: 100%;
+            height: 3px;
+            background: #d32f2f;
+            margin: 2px 0;
+        }
+
+        .site-title {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .site-subtitle {
+            font-size: 18px;
+            opacity: 0.95;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        nav {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 8px 15px;
+            margin-top: 15px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            display: block;
+            border-radius: 30px;
+            transition: 0.3s;
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #0d47a1 0%, #1976d2 50%, #42a5f5 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background-attachment: fixed;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+        }
+
+        .hero p {
+            font-size: 26px;
+            opacity: 0.95;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 50px auto;
+            padding: 0 30px;
+        }
+
+        /* Info Banner */
+        .info-banner {
+            background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 25px rgba(21, 101, 192, 0.3);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.25);
+        }
+
+        /* OOC Section */
+        .ooc-section {
+            background: linear-gradient(135deg, #ff6f00 0%, #ff8f00 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 25px rgba(255, 111, 0, 0.3);
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-left: 6px solid #1976d2;
+        }
+
+        .content-section h2 {
+            font-size: 38px;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #1976d2;
+            padding-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .value-card {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        /* Rank System */
+        .rank-list {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            padding: 40px;
+            border-radius: 15px;
+        }
+
+        .rank-item {
+            padding: 16px 30px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid #1976d2;
+        }
+
+        .rank-item.top {
+            background: linear-gradient(90deg, #fff3e0 0%, #ffe0b2 50%, white 100%);
+            border-left-color: #ff6f00;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="top-bar">
+            ★ ALTERNATIVE FÜR LOS SANTOS ★ DIE MODERNISIERUNGSKRAFT FÜR UNSERE STADT ★
+        </div>
+
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">
+                    <div>AfLS</div>
+                    <div class="stripes"></div>
+                    <div class="stripes"></div>
+                </div>
+                <div>
+                    <div class="site-title">Alternative für Los Santos</div>
+                    <div class="site-subtitle">Die Modernisierungskraft</div>
+                </div>
+            </div>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="#startseite" class="active">Startseite</a></li>
+                <li><a href="#vorstellung">Vorstellung</a></li>
+                <li><a href="#programm">Parteiprogramm</a></li>
+                <li><a href="#konzept">Konzept</a></li>
+                <li><a href="#rangsystem">Rangsystem</a></li>
+                <li><a href="#ideologie">Ideologie</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <div class="hero" id="startseite">
+        <h1>AfLS – Modernisierungskraft</h1>
+        <p>Für eine starke Zukunft — Los Santos neu gestalten!</p>
+        <div class="hero-badge">Transparenz • Sicherheit • Wohlstand</div>
+    </div>
+
+    <div class="container">
+
+        <!-- IC INFO -->
+        <div
