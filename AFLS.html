@@ -4,7 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AfLS - Alternative für Los Santos | Die Modernisierungskraft</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #534bae;
+            --primary-dark: #000051;
+            --secondary: #d32f2f;
+            --accent: #1976d2;
+            --light: #f5f7fa;
+            --dark: #2c3e50;
+            --gray: #6c757d;
+            --success: #28a745;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,34 +28,42 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
-            color: #2c3e50;
-            line-height: 1.6;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
 
         /* Header mit modernem Design */
         .header {
-            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 50%, #1976d2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             padding: 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             position: sticky;
             top: 0;
             z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            padding: 5px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
 
         .top-bar {
             background: rgba(0,0,0,0.2);
             padding: 10px 0;
             text-align: center;
-            font-size: 13px;
+            font-size: 14px;
             letter-spacing: 1px;
+            font-weight: 500;
         }
 
         .header-content {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 25px 30px;
+            padding: 20px 30px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -54,25 +77,30 @@
         }
 
         .logo {
-            width: 90px;
-            height: 90px;
+            width: 80px;
+            height: 80px;
             background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%);
             border-radius: 50%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 900;
-            color: #1a237e;
+            color: var(--primary);
             border: 4px solid rgba(255,255,255,0.3);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: rotate(5deg) scale(1.05);
         }
 
         .logo .stripes {
             width: 100%;
             height: 3px;
-            background: #d32f2f;
+            background: var(--secondary);
             margin: 2px 0;
         }
 
@@ -101,6 +129,7 @@
             border-radius: 50px;
             padding: 8px 15px;
             margin-top: 15px;
+            transition: var(--transition);
         }
 
         nav ul {
@@ -117,9 +146,26 @@
             padding: 12px 24px;
             display: block;
             border-radius: 30px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             font-weight: 500;
             font-size: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        nav ul li a:hover::before {
+            left: 100%;
         }
 
         nav ul li a:hover,
@@ -129,11 +175,11 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
-        /* Hero Section im Union-Style */
+        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #0d47a1 0%, #1976d2 50%, #42a5f5 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             color: white;
-            padding: 100px 20px;
+            padding: 120px 20px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -182,6 +228,12 @@
             font-weight: 600;
             backdrop-filter: blur(10px);
             border: 2px solid rgba(255,255,255,0.3);
+            transition: var(--transition);
+        }
+
+        .hero-badge:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
         }
 
         .container {
@@ -192,12 +244,18 @@
 
         /* Moderne Info-Cards */
         .info-banner {
-            background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: white;
             border-radius: 20px;
             padding: 40px;
             margin-bottom: 40px;
-            box-shadow: 0 8px 25px rgba(21, 101, 192, 0.3);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .info-banner:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(21, 101, 192, 0.3);
         }
 
         .info-banner h2 {
@@ -219,7 +277,7 @@
             padding: 30px;
             border-radius: 15px;
             border: 2px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .info-card:hover {
@@ -249,7 +307,13 @@
             border-radius: 20px;
             padding: 40px;
             margin-bottom: 40px;
-            box-shadow: 0 8px 25px rgba(255, 111, 0, 0.3);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .ooc-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(255, 111, 0, 0.3);
         }
 
         .ooc-section h3 {
@@ -258,27 +322,90 @@
             text-align: center;
         }
 
-        /* Content Sections im DGLS-Style */
+        /* Team Section */
+        .team-section {
+            background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 50px 40px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .team-section h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .team-member {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: var(--transition);
+        }
+
+        .team-member:hover {
+            transform: translateY(-8px) scale(1.03);
+            background: rgba(255,255,255,0.25);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .team-member .member-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .team-member .member-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .team-member .member-role {
+            font-size: 14px;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        /* Content Sections */
         .content-section {
             background: white;
             border-radius: 20px;
             padding: 50px;
             margin-bottom: 40px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            border-left: 6px solid #1976d2;
+            box-shadow: var(--shadow);
+            border-left: 6px solid var(--accent);
+            transition: var(--transition);
+        }
+
+        .content-section:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
 
         .content-section h2 {
-            color: #1a237e;
+            color: var(--primary);
             font-size: 38px;
             margin-bottom: 30px;
-            border-bottom: 4px solid #1976d2;
+            border-bottom: 4px solid var(--accent);
             padding-bottom: 15px;
             font-weight: 700;
         }
 
         .content-section h3 {
-            color: #0d47a1;
+            color: var(--primary-light);
             font-size: 26px;
             margin-top: 35px;
             margin-bottom: 20px;
@@ -289,12 +416,23 @@
             line-height: 1.9;
             margin-bottom: 20px;
             font-size: 17px;
-            text-align: justify;
+            color: #37474f;
+        }
+
+        .content-section ul {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+        .content-section li {
+            margin-bottom: 12px;
+            line-height: 1.8;
+            font-size: 17px;
             color: #37474f;
         }
 
         .content-section strong {
-            color: #0d47a1;
+            color: var(--primary-light);
             font-weight: 600;
         }
 
@@ -311,27 +449,49 @@
             padding: 35px;
             border-radius: 15px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .value-card:hover::before {
+            width: 100%;
+            opacity: 0.1;
         }
 
         .value-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 12px 30px rgba(13, 71, 161, 0.3);
-            border-color: #1976d2;
+            border-color: var(--accent);
         }
 
         .value-card .icon {
             font-size: 56px;
             margin-bottom: 20px;
             display: block;
+            position: relative;
+            z-index: 1;
         }
 
         .value-card h3 {
-            color: #1a237e;
+            color: var(--primary);
             margin-top: 0;
             margin-bottom: 18px;
             font-size: 22px;
+            position: relative;
+            z-index: 1;
         }
 
         .value-card p {
@@ -339,6 +499,8 @@
             margin-bottom: 0;
             font-size: 16px;
             color: #455a64;
+            position: relative;
+            z-index: 1;
         }
 
         /* Rangsystem */
@@ -354,10 +516,21 @@
             margin-bottom: 10px;
             background: white;
             border-radius: 10px;
-            border-left: 5px solid #1976d2;
+            border-left: 5px solid var(--accent);
             font-size: 17px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+        }
+
+        .rank-item::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-right: 15px;
         }
 
         .rank-item:hover {
@@ -372,6 +545,10 @@
             font-size: 18px;
         }
 
+        .rank-item.top::before {
+            background: #ff6f00;
+        }
+
         /* Ideologie Box */
         .ideology-box {
             background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
@@ -379,25 +556,37 @@
             border-radius: 15px;
             margin-top: 30px;
             border: 3px solid #5c6bc0;
+            transition: var(--transition);
+        }
+
+        .ideology-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(92, 107, 192, 0.3);
         }
 
         .slogan {
             text-align: center;
             font-size: 28px;
             font-weight: 700;
-            color: #1a237e;
+            color: var(--primary);
             margin-top: 40px;
             padding: 25px;
             background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
             border-radius: 15px;
-            border: 3px solid #1976d2;
+            border: 3px solid var(--accent);
             text-transform: uppercase;
             letter-spacing: 2px;
+            transition: var(--transition);
+        }
+
+        .slogan:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(25, 118, 210, 0.3);
         }
 
         /* Footer */
         .footer {
-            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             text-align: center;
             padding: 40px 20px;
@@ -410,8 +599,122 @@
             font-size: 16px;
         }
 
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: var(--transition);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 5px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
         /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+            
+            .hero p {
+                font-size: 22px;
+            }
+            
+            .content-section {
+                padding: 40px 30px;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
+            .hero {
+                padding: 80px 20px;
+            }
+            
             .hero h1 {
                 font-size: 36px;
             }
@@ -440,13 +743,57 @@
             .site-title {
                 font-size: 24px;
             }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .content-section h2 {
+                font-size: 28px;
+            }
+            
+            .content-section h3 {
+                font-size: 22px;
+            }
+            
+            .info-banner, .ooc-section, .team-section {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <header class="header">
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <header class="header" id="header">
         <div class="top-bar">
-            ★ ALTERNATIVE FÜR LOS SANTOS ★ DIE MODRRNISIERUNGSKRAFT FÜR UNSERE STADT ★
+            ★ ALTERNATIVE FÜR LOS SANTOS ★ DIE MODERNISIERUNGSKRAFT FÜR UNSERE STADT ★
         </div>
         <div class="header-content">
             <div class="logo-section">
@@ -465,6 +812,7 @@
             <ul>
                 <li><a href="#startseite" class="active">Startseite</a></li>
                 <li><a href="#vorstellung">Vorstellung</a></li>
+                <li><a href="#team">Unser Team</a></li>
                 <li><a href="#programm">Parteiprogramm</a></li>
                 <li><a href="#konzept">Konzept</a></li>
                 <li><a href="#rangsystem">Rangsystem</a></li>
@@ -484,30 +832,30 @@
     <div class="container">
         <!-- IC Informationen -->
         <div class="info-banner">
-            <h2>📋 Bewerbungsinformationen (IC)</h2>
+            <h2><i class="fas fa-id-card"></i> Bewerbungsinformationen (IC)</h2>
             <div class="info-grid">
                 <div class="info-card">
-                    <h4>👤 Name</h4>
+                    <h4><i class="fas fa-user"></i> Name</h4>
                     <p>Vincenzo Young</p>
                 </div>
                 <div class="info-card">
-                    <h4>🆔 Staatsbürger-ID</h4>
+                    <h4><i class="fas fa-id-badge"></i> Staatsbürger-ID</h4>
                     <p>160115</p>
                 </div>
                 <div class="info-card">
-                    <h4>📄 Visum</h4>
+                    <h4><i class="fas fa-file-alt"></i> Visum</h4>
                     <p>43</p>
                 </div>
                 <div class="info-card">
-                    <h4>🏛️ Partei</h4>
+                    <h4><i class="fas fa-landmark"></i> Partei</h4>
                     <p>AfLS</p>
                 </div>
                 <div class="info-card">
-                    <h4>👔 Position</h4>
+                    <h4><i class="fas fa-briefcase"></i> Position</h4>
                     <p>Gouverneur</p>
                 </div>
                 <div class="info-card">
-                    <h4>🤝 Vize-Gouverneur</h4>
+                    <h4><i class="fas fa-user-friends"></i> Vize-Gouverneur</h4>
                     <p>Marvin Benko</p>
                 </div>
             </div>
@@ -515,7 +863,7 @@
 
         <!-- OOC Informationen -->
         <div class="ooc-section">
-            <h3>🎮 OOC Informationen</h3>
+            <h3><i class="fas fa-gamepad"></i> OOC Informationen</h3>
             <div class="info-grid">
                 <div class="info-card">
                     <h4>Spielername (OOC)</h4>
@@ -530,139 +878,249 @@
 
         <!-- Vorstellung -->
         <div class="content-section" id="vorstellung">
-            <h2>Vorstellung - Vincenzo Young</h2>
+            <h2><i class="fas fa-user-tie"></i> Vorstellung - Vincenzo Young</h2>
             <p>
                 Sehr geehrte Mitbürgerinnen und Mitbürger von Los Santos,
             </p>
             <p>
-                mein Name ist Vincenzo Young, und ich trete heute vor Sie, um mich als Kandidat für das Amt des Gouverneurs von Los Santos vorzustellen. Diese Stadt, die wir alle Heimat nennen, steht an einem Wendepunkt – einem Punkt, an dem wir entscheiden müssen, welchen Weg wir einschlagen wollen.
+                mein Name ist Vincenzo Young, und ich möchte mich als Kandidat für das Amt des Gouverneurs von Los Santos vorstellen. Unsere Stadt steht vor wichtigen Entscheidungen, und ich möchte meinen Beitrag zu einer besseren Zukunft leisten.
             </p>
             <p>
-                Los Santos ist eine Stadt voller Potenzial, voller Menschen mit Träumen und Ambitionen. Doch zu oft werden diese Träume durch überbordende Bürokratie, mangelnde Sicherheit und fehlende wirtschaftliche Perspektiven erstickt. Das muss sich ändern – und genau dafür stehe ich.
+                Los Santos hat großes Potenzial – voller Menschen mit Träumen und Ideen. Doch oft werden diese durch unnötige Bürokratie, fehlende Sicherheit und mangelnde wirtschaftliche Perspektiven gebremst. Das wollen wir ändern.
             </p>
             <p>
-                Ich habe die letzten Jahre damit verbracht, unsere Stadt zu verstehen – ihre Stärken, aber auch ihre Schwächen. Ich habe mit Unternehmern gesprochen, die unter hohen Steuern leiden. Ich habe mit Familien geredet, die sich in ihren eigenen Vierteln nicht mehr sicher fühlen. Ich habe Bürger getroffen, die von ihrer Regierung im Stich gelassen wurden.
+                In den letzten Jahren habe ich mir ein umfassendes Bild unserer Stadt gemacht. Ich habe mit Unternehmern gesprochen, die unter hohen Steuern leiden. Mit Familien, die sich mehr Sicherheit in ihrer Nachbarschaft wünschen. Mit Bürgern, die sich von der Politik alleingelassen fühlen.
             </p>
             <p>
-                Diese Erfahrungen haben mich geprägt und mir gezeigt: Los Santos braucht keine Politiker, die schöne Reden halten. Los Santos braucht Führungspersönlichkeiten, die anpacken. Die Verantwortung übernehmen. Die Lösungen liefern.
+                Diese Gespräche haben mir gezeigt: Los Santos braucht keine schönen Worte, sondern konkrete Taten. Politiker, die Verantwortung übernehmen und praktische Lösungen umsetzen.
             </p>
             <p>
-                Gemeinsam mit meinem Stellvertreter Marvin Benko habe ich eine klare Vision entwickelt: Eine Stadt, in der Recht und Ordnung herrschen. Eine Stadt, in der die Wirtschaft floriert und Arbeitsplätze entstehen. Eine Stadt, in der die Verwaltung effizient arbeitet und für die Bürger da ist – nicht umgekehrt.
+                Zusammen mit meinem Stellvertreter Marvin Benko und unserem engagierten Team haben wir eine klare Vision: Eine Stadt mit Sicherheit und Ordnung. Eine Stadt, in der die Wirtschaft wächst und Arbeitsplätze entstehen. Eine Stadt mit einer effizienten Verwaltung, die für die Bürger da ist.
             </p>
             <p>
-                Die AfLS steht für einen Politikwechsel, für frischen Wind und neue Ansätze. Wir sind die Modernisierungskraft, die Los Santos braucht. Ich lade Sie ein, diesen Weg mit uns zu gehen – für eine starke Zukunft unserer Stadt!
+                Die AfLS steht für einen frischen politischen Ansatz. Wir sind die Modernisierungskraft, die Los Santos braucht. Ich lade Sie herzlich ein, diesen Weg mit uns zu gehen – für eine starke Zukunft unserer Stadt!
             </p>
+        </div>
+
+        <!-- Team Section -->
+        <div class="team-section" id="team">
+            <h2><i class="fas fa-users"></i> Unser engagiertes Team</h2>
+            <p style="text-align: center; font-size: 18px; margin-bottom: 30px; opacity: 0.95;">
+                Die AfLS wird von einem starken Team getragen. Gemeinsam arbeiten wir für eine bessere Zukunft von Los Santos!
+            </p>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Samir Kasalla</div>
+                    <div class="member-role">Leaderschaft</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Tomek Young</div>
+                    <div class="member-role">Leaderschaft</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Nico Kraftwerk</div>
+                    <div class="member-role">Teammitglied</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Ben Benko</div>
+                    <div class="member-role">Teammitglied</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Simon Benko</div>
+                    <div class="member-role">Teammitglied</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Laouin Dejavu</div>
+                    <div class="member-role">Teammitglied</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Anatoly Kalashnikov</div>
+                    <div class="member-role">Teammitglied</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Rheiner Easy</div>
+                    <div class="member-role">Teammitglied</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Auraujooo Dinhooo</div>
+                    <div class="member-role">Teammitglied</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Venji Kalashnikov</div>
+                    <div class="member-role">Teammitglied</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Kalvin Huebert</div>
+                    <div class="member-role">Teammitglied</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Tim Timmer</div>
+                    <div class="member-role">Teammitglied</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Yassin Benko</div>
+                    <div class="member-role">Teammitglied</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Elias Moon</div>
+                    <div class="member-role">Teammitglied</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Mason Moon</div>
+                    <div class="member-role">Teammitglied</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Enis Moon</div>
+                    <div class="member-role">Teammitglied</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Opa Yuri</div>
+                    <div class="member-role">Teammitglied</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Joseph Askanier</div>
+                    <div class="member-role">Teammitglied</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Tom Moon</div>
+                    <div class="member-role">Teammitglied</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👤</div>
+                    <div class="member-name">Jancarlo Montana</div>
+                    <div class="member-role">Teammitglied</div>
+                </div>
+            </div>
         </div>
 
         <!-- Parteiprogramm -->
         <div class="content-section" id="programm">
-            <h2>Parteiprogramm - Dafür stehen wir</h2>
+            <h2><i class="fas fa-file-contract"></i> Parteiprogramm - Dafür stehen wir</h2>
             
             <div class="values-grid">
                 <div class="value-card">
                     <div class="icon">🛡️</div>
                     <h3>Sicherheit & Ordnung</h3>
-                    <p>Null-Toleranz-Politik gegen Kriminalität. Mehr Polizeipräsenz auf den Straßen. Härtere Strafen für Gewaltverbrechen. Schutz unserer Bürger hat oberste Priorität.</p>
+                    <p>Konsequente Kriminalitätsbekämpfung. Mehr Polizeipräsenz auf den Straßen. Der Schutz unserer Bürger hat oberste Priorität.</p>
                 </div>
                 
                 <div class="value-card">
                     <div class="icon">💼</div>
                     <h3>Wirtschaftsförderung</h3>
-                    <p>Steuererleichterungen für Kleinunternehmen und Start-ups. Abbau von Bürokratie. Förderung von Innovationen. Arbeitsplätze für alle Bürger.</p>
+                    <p>Steuererleichterungen für Kleinunternehmen. Weniger Bürokratie, mehr Innovation. Gute Arbeitsplätze für alle Bürger.</p>
                 </div>
                 
                 <div class="value-card">
                     <div class="icon">🏗️</div>
                     <h3>Moderne Infrastruktur</h3>
-                    <p>Sanierung maroder Straßen und Brücken. Ausbau des öffentlichen Nahverkehrs. Digitalisierung der Verwaltung für effizientere Abläufe.</p>
+                    <p>Sanierung von Straßen und Brücken. Besserer öffentlicher Nahverkehr. Digitalisierung der Verwaltung.</p>
                 </div>
                 
                 <div class="value-card">
                     <div class="icon">⚖️</div>
                     <h3>Rechtsstaat & Justiz</h3>
-                    <p>Unabhängige Justiz mit schnellen Verfahren. Konsequente Strafverfolgung. Gleiches Recht für alle ohne Ansehen der Person.</p>
+                    <p>Unabhängige Justiz mit fairen Verfahren. Konsequente Strafverfolgung. Gleiches Recht für alle.</p>
                 </div>
                 
                 <div class="value-card">
                     <div class="icon">🤝</div>
                     <h3>Transparenz & Dialog</h3>
-                    <p>Regelmäßige Bürgersprechstunden. Transparente Entscheidungsprozesse. Rechenschaftspflicht auf allen Ebenen der Verwaltung.</p>
+                    <p>Regelmäßige Bürgersprechstunden. Offene Entscheidungsprozesse. Rechenschaft auf allen Ebenen.</p>
                 </div>
                 
                 <div class="value-card">
                     <div class="icon">🎯</div>
                     <h3>Effizienz & Reform</h3>
-                    <p>Schlanke Verwaltung ohne überflüssige Bürokratie. Schnelle Entscheidungen. Pragmatische Lösungen statt Bedenkenträgerei.</p>
+                    <p>Schlanke Verwaltung. Schnelle Entscheidungen. Praktische Lösungen statt unnötiger Vorschriften.</p>
                 </div>
             </div>
 
             <h3>Konkrete Maßnahmen für Los Santos:</h3>
             
             <p>
-                <strong>🔹 Innere Sicherheit:</strong> Ausbau der Polizeipräsenz in Brennpunktvierteln um 40%. Einführung moderner Überwachungstechnologie an kritischen Punkten. Null-Toleranz-Strategie gegen organisierte Kriminalität und Bandenwesen. Stärkung unserer Sicherheitskräfte durch bessere Ausrüstung und höhere Budgets.
+                <strong>🔹 Innere Sicherheit:</strong> Mehr Polizeipräsenz in Problemvierteln. Moderne Sicherheitstechnik an wichtigen Punkten. Konsequenter Kampf gegen organisierte Kriminalität. Bessere Ausstattung unserer Sicherheitskräfte.
             </p>
             <p>
-                <strong>🔹 Wirtschaft & Arbeitsmarkt:</strong> Senkung der Gewerbesteuer um 15% für lokale Unternehmen. Schnellere Genehmigungsverfahren für Geschäftseröffnungen. Förderung von Start-ups durch zinsgünstige Kredite. Schaffung von 5.000 neuen Arbeitsplätzen innerhalb der ersten Amtszeit.
+                <strong>🔹 Wirtschaft & Arbeitsmarkt:</strong> Senkung der Gewerbesteuer für lokale Unternehmen. Schnellere Genehmigungen für Geschäftseröffnungen. Förderung von Start-ups. Schaffung neuer Arbeitsplätze.
             </p>
             <p>
-                <strong>🔹 Infrastruktur & Verkehr:</strong> Sanierungsprogramm für alle Hauptverkehrsstraßen. Ausbau des Bus- und Bahnnetzes. Modernisierung der Hafenanlage für mehr Handel. Investitionen in intelligente Verkehrsleitsysteme zur Stauvermeidung.
+                <strong>🔹 Infrastruktur & Verkehr:</strong> Sanierung aller Hauptverkehrsstraßen. Ausbau des Bus- und Bahnnetzes. Modernisierung der Hafenanlage. Intelligente Verkehrsleitsysteme.
             </p>
             <p>
-                <strong>🔹 Verwaltung & Bürgerservice:</strong> Digitalisierung aller Behördengänge – 90% online abwickelbar. Reduzierung der Bearbeitungszeiten um die Hälfte. Einführung einer Bürger-App für direkten Kontakt zur Verwaltung. Abbau überflüssiger Vorschriften und Regularien.
+                <strong>🔹 Verwaltung & Bürgerservice:</strong> Digitalisierung der Behördengänge – die meisten Anträge online möglich. Kürzere Bearbeitungszeiten. Bürger-App für direkten Kontakt. Weniger unnötige Vorschriften.
             </p>
             <p>
-                <strong>🔹 Justiz & Rechtswesen:</strong> Beschleunigung von Gerichtsverfahren durch mehr Personal. Härtere Strafen für Wiederholungstäter. Ausbau der Bewährungshilfe zur Resozialisierung. Stärkung der Opferrechte bei Strafverfahren.
+                <strong>🔹 Justiz & Rechtswesen:</strong> Schnellere Gerichtsverfahren durch mehr Personal. Angemessene Strafen für Wiederholungstäter. Bessere Bewährungshilfe. Stärkung der Opferrechte.
             </p>
         </div>
 
         <!-- Konzept -->
         <div class="content-section" id="konzept">
-            <h2>Unser Konzept - Die Modernisierungskraft</h2>
+            <h2><i class="fas fa-lightbulb"></i> Unser Konzept - Die Modernisierungskraft</h2>
             <p>
-                Die AfLS versteht sich als <strong>Reformkraft</strong> für Los Santos. Wir sind nicht angetreten, um den Status quo zu verwalten, sondern um echte Veränderungen herbeizuführen. Unser Konzept basiert auf drei tragenden Säulen:
+                Die AfLS versteht sich als <strong>Reformkraft</strong> für Los Santos. Wir sind nicht angetreten, um die Dinge einfach nur zu verwalten, sondern um echte Veränderungen zu bewirken. Unser Konzept basiert auf drei wichtigen Säulen:
             </p>
 
             <h3>1. Sicherheit als Fundament</h3>
             <p>
-                Ohne Sicherheit gibt es keine Freiheit. Ohne Ordnung keine Gerechtigkeit. Die AfLS setzt auf eine konsequente Sicherheitspolitik, die den rechtschaffenen Bürger schützt und den Kriminellen das Handwerk legt. Wir stehen fest an der Seite unserer Polizei und Justiz und geben ihnen die Mittel, die sie brauchen.
+                Ohne Sicherheit gibt es keine echte Freiheit. Die AfLS setzt auf eine konsequente Sicherheitspolitik, die rechtschaffene Bürger schützt und Kriminalität bekämpft. Wir stehen fest an der Seite unserer Polizei und Justiz und geben ihnen die nötigen Mittel.
             </p>
             <p>
-                Unsere Vision: Los Santos soll die sicherste Großstadt der Region werden. Jeder Bürger soll sich zu jeder Tages- und Nachtzeit frei bewegen können – ohne Angst, ohne Sorge.
+                Unsere Vision: Los Santos soll eine sichere Stadt werden, in der sich jeder Bürger zu jeder Zeit frei bewegen kann – ohne Angst und Sorge.
             </p>
 
             <h3>2. Wohlstand durch Leistung</h3>
             <p>
-                Wir glauben an die Kraft des freien Unternehmertums und den Fleiß unserer Bürger. Die AfLS steht für eine Wirtschaftspolitik, die diejenigen belohnt, die arbeiten, investieren und Risiken eingehen. Wir senken Steuern, bauen Bürokratie ab und schaffen ein Umfeld, in dem Unternehmen wachsen können.
+                Wir glauben an die Kraft des Unternehmertums und den Fleiß unserer Bürger. Die AfLS steht für eine Wirtschaftspolitik, die diejenigen unterstützt, die arbeiten, investieren und Verantwortung übernehmen. Wir senken Steuern, bauen Bürokratie ab und schaffen ein Umfeld für Wachstum.
             </p>
             <p>
-                Gleichzeitig vergessen wir niemanden. Wer wirklich Hilfe braucht, bekommt sie. Aber wir erwarten auch, dass jeder seinen Teil zum Gemeinwohl beiträgt. Fördern und Fordern – das ist unser Ansatz.
+                Gleichzeitig vergessen wir niemanden. Wer Hilfe braucht, bekommt sie. Aber wir erwarten auch, dass jeder seinen Teil zum Gemeinwohl beiträgt.
             </p>
 
             <h3>3. Verwaltung im Dienst der Bürger</h3>
             <p>
-                Zu lange haben Bürger unter einer aufgeblähten, ineffizienten Verwaltung gelitten. Die AfLS krempelt die Ärmel hoch und digitalisiert, modernisiert und verschlankt die Behörden. Unser Ziel: 80% aller Anträge sollen online und innerhalb von 48 Stunden bearbeitet werden.
+                Zu lange haben Bürger unter ineffizienten Behörden gelitten. Die AfLS modernisiert und digitalisiert die Verwaltung. Unser Ziel: Die meisten Anträge sollen online und schnell bearbeitet werden können.
             </p>
             <p>
-                Wir setzen auf Transparenz und Rechenschaftspflicht. Jeder Bürger hat das Recht zu wissen, wie sein Steuergeld verwendet wird. Jeder Beamte trägt Verantwortung für seine Entscheidungen.
+                Wir setzen auf Transparenz und Verantwortung. Jeder Bürger hat das Recht zu wissen, wie sein Steuergeld verwendet wird.
             </p>
 
             <div class="ideology-box">
                 <h3>Unser Versprechen an Los Santos:</h3>
                 <p>
-                    ✓ Innerhalb von 6 Monaten: Spürbare Reduzierung der Kriminalitätsrate<br>
-                    ✓ Innerhalb von 1 Jahr: 2.000 neue Arbeitsplätze geschaffen<br>
-                    ✓ Innerhalb von 1 Jahr: Digitalisierung von 70% aller Behördengänge<br>
-                    ✓ Innerhalb von 2 Jahren: Sanierung aller Hauptverkehrsstraßen<br>
-                    ✓ Kontinuierlich: Regelmäßige Bürgerdialoge und transparente Berichterstattung
+                    ✓ Innerhalb von 6 Monaten: Spürbare Verbesserung der Sicherheitslage<br>
+                    ✓ Innerhalb von 1 Jahr: Neue Arbeitsplätze schaffen<br>
+                    ✓ Innerhalb von 1 Jahr: Digitalisierung vieler Behördengänge<br>
+                    ✓ Innerhalb von 2 Jahren: Sanierung der Hauptverkehrsstraßen<br>
+                    ✓ Kontinuierlich: Regelmäßiger Bürgerdialog und transparente Information
                 </p>
             </div>
         </div>
 
         <!-- Rangsystem -->
         <div class="content-section" id="rangsystem">
-            <h2>Rangsystem der AfLS-Regierung</h2>
+            <h2><i class="fas fa-sitemap"></i> Rangsystem der AfLS-Regierung</h2>
             <p>
-                Klare Strukturen, klare Verantwortlichkeiten – die AfLS-Regierung setzt auf eine effiziente Hierarchie, die schnelle Entscheidungen ermöglicht und Zuständigkeiten eindeutig regelt.
+                Klare Strukturen und eindeutige Verantwortlichkeiten – die AfLS-Regierung setzt auf eine effiziente Organisation, die schnelle Entscheidungen ermöglicht.
             </p>
             
             <div class="rank-list">
@@ -701,40 +1159,40 @@
 
         <!-- Ideologie -->
         <div class="content-section" id="ideologie">
-            <h2>Unsere Ideologie</h2>
+            <h2><i class="fas fa-brain"></i> Unsere Ideologie</h2>
             
             <p>
-                Die AfLS – Alternative für Los Santos – steht für eine <strong>progressive, reformorientierte und bürgernahe</strong> Politik, die Los Santos nachhaltig verändern will. Wir kombinieren konservative Werte wie Sicherheit und Ordnung mit modernen, innovativen Ansätzen in Wirtschaft und Verwaltung.
+                Die AfLS – Alternative für Los Santos – steht für eine <strong>progressive, reformorientierte und bürgernahe</strong> Politik. Wir kombinieren bewährte Werte wie Sicherheit und Ordnung mit modernen, innovativen Ansätzen in Wirtschaft und Verwaltung.
             </p>
 
             <h3>Grundwerte der AfLS:</h3>
             
             <div class="ideology-box">
-                <p><strong>🔷 Sicherheit:</strong> Die Sicherheit unserer Bürger ist nicht verhandelbar. Wir stehen für klare Kante gegen Kriminalität und konsequente Strafverfolgung.</p>
+                <p><strong>🔷 Sicherheit:</strong> Die Sicherheit unserer Bürger ist nicht verhandelbar. Wir stehen für konsequente Kriminalitätsbekämpfung.</p>
                 
                 <p><strong>🔷 Freiheit:</strong> Jeder Bürger soll die Freiheit haben, sein Leben nach eigenen Vorstellungen zu gestalten – solange er die Freiheit anderer respektiert.</p>
                 
-                <p><strong>🔷 Gerechtigkeit:</strong> Gleiches Recht für alle. Keine Privilegien für Eliten. Keine Sonderbehandlung für Reiche oder Mächtige.</p>
+                <p><strong>🔷 Gerechtigkeit:</strong> Gleiches Recht für alle. Keine Privilegien für Eliten. Keine Sonderbehandlung.</p>
                 
-                <p><strong>🔷 Transparenz:</strong> Bürger haben das Recht zu wissen, was ihre Regierung tut. Wir legen unsere Entscheidungen offen und stehen zu unseren Taten.</p>
+                <p><strong>🔷 Transparenz:</strong> Bürger haben das Recht zu wissen, was ihre Regierung tut. Wir legen unsere Entscheidungen offen.</p>
                 
-                <p><strong>🔷 Effizienz:</strong> Schluss mit Bürokratie und Zeitverschwendung. Schnelle Entscheidungen, pragmatische Lösungen, messbare Ergebnisse.</p>
+                <p><strong>🔷 Effizienz:</strong> Schluss mit unnötiger Bürokratie. Schnelle Entscheidungen, praktische Lösungen, messbare Ergebnisse.</p>
                 
-                <p><strong>🔷 Verantwortung:</strong> Jeder trägt Verantwortung – für sich selbst, für seine Familie, für die Gemeinschaft. Wir fördern Eigenverantwortung und gesellschaftlichen Zusammenhalt.</p>
+                <p><strong>🔷 Verantwortung:</strong> Jeder trägt Verantwortung – für sich selbst, für seine Familie, für die Gemeinschaft.</p>
             </div>
 
             <h3>Unsere Vision für Los Santos:</h3>
             <p>
-                Wir sehen Los Santos als <strong>Vorzeigestadt</strong> – eine Stadt, in der Innovation und Tradition Hand in Hand gehen. Eine Stadt, in der Wirtschaft floriert, ohne dass soziale Gerechtigkeit auf der Strecke bleibt. Eine Stadt, in der Bürger stolz darauf sind, hier zu leben.
+                Wir sehen Los Santos als <strong>moderne Vorzeigestadt</strong> – eine Stadt, in der Innovation und Tradition Hand in Hand gehen. Eine Stadt, in der die Wirtschaft wächst, ohne dass Gerechtigkeit auf der Strecke bleibt. Eine Stadt, auf die ihre Bürger stolz sind.
             </p>
             <p>
-                Die AfLS setzt auf <strong>Dialog statt Monolog</strong>. Wir hören zu, bevor wir entscheiden. Wir beziehen Bürger ein, bevor wir Gesetze verabschieden. Aber wenn eine Entscheidung getroffen ist, handeln wir – konsequent und zielstrebig.
+                Die AfLS setzt auf <strong>Dialog statt Monolog</strong>. Wir hören zu, bevor wir entscheiden. Wir beziehen Bürger ein, bevor wir Gesetze verabschieden. Aber wenn eine Entscheidung getroffen ist, handeln wir konsequent.
             </p>
             <p>
-                Unsere Politik basiert auf <strong>Vernunft, nicht Ideologie</strong>. Wir fragen nicht, ob eine Idee von links oder rechts kommt – wir fragen, ob sie funktioniert. Pragmatismus ist unser Kompass, das Wohl der Bürger unser Ziel.
+                Unsere Politik basiert auf <strong>Vernunft, nicht Ideologie</strong>. Wir fragen nicht, woher eine Idee kommt – wir fragen, ob sie funktioniert. Pragmatismus ist unser Kompass, das Wohl der Bürger unser Ziel.
             </p>
             <p>
-                Die AfLS steht für eine Politik, die <strong>messbare Ergebnisse</strong> liefert. Keine leeren Versprechungen, keine Ausreden. Wir setzen uns klare Ziele und arbeiten Tag für Tag daran, sie zu erreichen. Und wenn wir scheitern, stehen wir dazu und korrigieren unseren Kurs.
+                Die AfLS steht für eine Politik, die <strong>messbare Ergebnisse</strong> liefert. Keine leeren Versprechungen. Wir setzen uns klare Ziele und arbeiten daran, sie zu erreichen. Und wenn wir Fehler machen, stehen wir dazu und korrigieren unseren Kurs.
             </p>
 
             <div class="slogan">
@@ -750,6 +1208,9 @@
         <p style="font-size: 18px;">
             Die Modernisierungskraft für unsere Stadt
         </p>
+        
+
+        
         <p style="margin-top: 20px; opacity: 0.9;">
             Kontakt: Vincenzo Young | ID: 160115 | Visum: 43
         </p>
@@ -759,6 +1220,14 @@
     </footer>
 
     <script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            const loading = document.getElementById('loading');
+            setTimeout(() => {
+                loading.classList.add('hide');
+            }, 1000);
+        });
+
         // Smooth Scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -781,7 +1250,7 @@
         // Scroll Spy
         window.addEventListener('scroll', () => {
             let current = '';
-            const sections = document.querySelectorAll('.content-section, .hero');
+            const sections = document.querySelectorAll('.content-section, .hero, .team-section');
             
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
@@ -796,6 +1265,30 @@
                     link.classList.add('active');
                 }
             });
+
+            // Header scroll effect
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        // Back to top functionality
+        document.getElementById('backToTop').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
 
         // Parallax Effect für Hero
@@ -803,6 +1296,30 @@
             const hero = document.querySelector('.hero');
             const scrolled = window.pageYOffset;
             hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.content-section, .info-banner, .ooc-section, .value-card, .team-section, .team-member').forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
         });
     </script>
 </body>
